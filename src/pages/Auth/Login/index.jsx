@@ -1,3 +1,4 @@
+import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router";
@@ -7,8 +8,13 @@ import { setAuthCookie } from "../../../utils/cookies";
 import Login from "../../../components/Auth/Login";
 
 const LoginPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm();
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = (payloads) => {
@@ -22,12 +28,19 @@ const LoginPage = () => {
 
         setIsLoading(false);
         setAuthCookie(JSON.stringify(user));
-        setIsError(false);
         navigate("/");
       })
       .catch((error) => {
+        const errorMsg = error.code.split("/")[1].split("-").join(" ");
+        const errorMsgFormatted = `${errorMsg[0].toUpperCase()}${errorMsg.substr(
+          1
+        )}`;
+
         setIsLoading(false);
-        setIsError(true);
+        setError("password", {
+          type: "custom",
+          message: errorMsgFormatted,
+        });
       });
   };
 
@@ -39,7 +52,9 @@ const LoginPage = () => {
       <Login
         handleLogin={handleLogin}
         isLoading={isLoading}
-        isError={isError}
+        registerForm={register}
+        handleSubmitForm={handleSubmit}
+        formErrors={errors}
       />
     </>
   );

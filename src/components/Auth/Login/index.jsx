@@ -1,16 +1,15 @@
-import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logoNavbar from "../../../assets/images/logo-nav.png";
 import "./style.scss";
 
-const Login = ({ handleLogin, isLoading, isError = false }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
+const Login = ({
+  handleLogin,
+  isLoading,
+  registerForm,
+  handleSubmitForm,
+  formErrors,
+}) => {
   return (
     <section id="login" className="login">
       <div className="container login__container">
@@ -22,7 +21,10 @@ const Login = ({ handleLogin, isLoading, isError = false }) => {
           <header className="login__header">
             <h4>Sign in to your account</h4>
           </header>
-          <form className="login__form" onSubmit={handleSubmit(handleLogin)}>
+          <form
+            className="login__form"
+            onSubmit={handleSubmitForm(handleLogin)}
+          >
             <div className="login__form__group">
               <label htmlFor="email" className="form-label">
                 Email
@@ -34,7 +36,7 @@ const Login = ({ handleLogin, isLoading, isError = false }) => {
                 id="email"
                 aria-describedby="email"
                 placeholder="johndoe@gmail.com"
-                {...register("email", {
+                {...registerForm("email", {
                   required: "Email must be filled in",
                 })}
               />
@@ -50,19 +52,19 @@ const Login = ({ handleLogin, isLoading, isError = false }) => {
                 id="password"
                 aria-describedby="password"
                 placeholder="password"
-                {...register("password", {
+                {...registerForm("password", {
                   required: "Password must be filled in",
                 })}
               />
             </div>
-            {isError && (
+            {(formErrors?.email || formErrors?.password) && (
               <span className="custom-invalid-feedback">
                 <FontAwesomeIcon
                   icon="fa-solid fa-triangle-exclamation"
                   bounce
                   style={{ marginRight: "5px" }}
                 />
-                Invalid email and password
+                {formErrors?.email?.message || formErrors?.password?.message}
               </span>
             )}
             <div className="login__form__action">
