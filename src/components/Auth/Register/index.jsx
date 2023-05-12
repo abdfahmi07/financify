@@ -1,16 +1,15 @@
-import { useForm } from "react-hook-form";
 import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import logoNavbar from "../../../assets/images/logo-nav.png";
 import "./style.scss";
 
-const Register = ({ handleRegister, isLoading, isError = false }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
+const Register = ({
+  handleRegister,
+  isLoading,
+  registerForm,
+  handleSubmitForm,
+  formErrors,
+}) => {
   return (
     <section id="register" className="register">
       <div className="container register__container">
@@ -24,7 +23,7 @@ const Register = ({ handleRegister, isLoading, isError = false }) => {
           </header>
           <form
             className="register__form"
-            onSubmit={handleSubmit(handleRegister)}
+            onSubmit={handleSubmitForm(handleRegister)}
           >
             <div className="register__form__group">
               <label htmlFor="email" className="form-label">
@@ -37,7 +36,7 @@ const Register = ({ handleRegister, isLoading, isError = false }) => {
                 id="name"
                 aria-describedby="name"
                 placeholder="john doe"
-                {...register("name", {
+                {...registerForm("name", {
                   required: "Name must be filled in",
                 })}
               />
@@ -53,7 +52,7 @@ const Register = ({ handleRegister, isLoading, isError = false }) => {
                 id="email"
                 aria-describedby="email"
                 placeholder="johndoe@gmail.com"
-                {...register("email", {
+                {...registerForm("email", {
                   required: "Email must be filled in",
                 })}
               />
@@ -69,19 +68,23 @@ const Register = ({ handleRegister, isLoading, isError = false }) => {
                 id="password"
                 aria-describedby="password"
                 placeholder="password"
-                {...register("password", {
+                {...registerForm("password", {
                   required: "Password must be filled in",
                 })}
               />
             </div>
-            {isError && (
+            {(formErrors?.name ||
+              formErrors?.email ||
+              formErrors?.password) && (
               <span className="custom-invalid-feedback">
                 <FontAwesomeIcon
                   icon="fa-solid fa-triangle-exclamation"
                   bounce
                   style={{ marginRight: "5px" }}
                 />
-                Invalid email and password
+                {formErrors?.name?.message ||
+                  formErrors?.email?.message ||
+                  formErrors?.password?.message}
               </span>
             )}
             <div className="register__form__action">
