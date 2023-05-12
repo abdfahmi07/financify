@@ -1,3 +1,4 @@
+import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router";
@@ -7,12 +8,17 @@ import { setAuthCookie } from "../../../utils/cookies";
 import Register from "../../../components/Auth/Register";
 
 const RegisterPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleRegister = (payloads) => {
     const { name, email, password } = payloads;
-    console.log(payloads);
 
     setIsLoading(true);
 
@@ -33,8 +39,16 @@ const RegisterPage = () => {
           });
       })
       .catch((error) => {
+        const errorMsg = error.code.split("/")[1].split("-").join(" ");
+        const errorMsgFormatted = `${errorMsg[0].toUpperCase()}${errorMsg.substr(
+          1
+        )}`;
+
         setIsLoading(false);
-        console.log(error);
+        setError("password", {
+          type: "custom",
+          message: errorMsgFormatted,
+        });
       });
   };
 
@@ -43,7 +57,13 @@ const RegisterPage = () => {
       <Helmet>
         <title>Create Account | Financify</title>
       </Helmet>
-      <Register handleRegister={handleRegister} isLoading={isLoading} />
+      <Register
+        handleRegister={handleRegister}
+        isLoading={isLoading}
+        registerForm={register}
+        handleSubmitForm={handleSubmit}
+        formErrors={errors}
+      />
     </>
   );
 };
