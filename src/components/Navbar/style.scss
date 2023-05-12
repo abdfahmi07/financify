@@ -1,0 +1,103 @@
+#navbar {
+  padding: 1.5rem 0;
+
+  .navbar__container {
+    padding: 0 3rem;
+    .navbar__brand,
+    .navbar__menu__list {
+      display: flex;
+    }
+
+    .navbar__brand {
+      text-decoration: none;
+      color: inherit;
+      align-items: center;
+      gap: 0.325rem;
+
+      & > h4 {
+        margin-bottom: 0;
+      }
+    }
+
+    .navbar__menu {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+
+      &__list {
+        gap: 2rem;
+        padding-left: 0;
+        margin-bottom: 0;
+      }
+
+      &__item > a {
+        color: inherit;
+        font-weight: 500;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .navbar__profile {
+        position: relative;
+
+        .profile {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 2.25rem;
+          height: 2.25rem;
+          border-radius: 50%;
+          background-color: #512da8;
+          font-size: 1.25rem;
+          color: #fff;
+          cursor: pointer;
+
+          & > h6.first-name {
+            font-weight: 400;
+            margin-bottom: 0;
+          }
+        }
+
+        .profile__menu {
+          width: 10rem;
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          background-color: #fff;
+          border: 1px solid #000;
+          right: 0;
+          top: 3rem;
+          padding: 0.5rem 0;
+          box-shadow: 0px 3px 35px rgba(0, 0, 0, 0.1);
+
+          .profile__name {
+            padding: 0.5rem 1rem;
+            margin-bottom: 0;
+            font-size: 0.875rem;
+          }
+
+          .profile__menu__list {
+            padding: 0;
+            margin: 0;
+
+            & > li.profile__menu__item {
+              font-size: 0.875rem;
+              font-weight: 600;
+              cursor: pointer;
+              padding: 0.5rem 1rem;
+              color: #d23e3e;
+              transition: 0.3s;
+
+              &:hover {
+                background-color: #eee;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

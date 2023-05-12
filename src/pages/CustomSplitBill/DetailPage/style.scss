@@ -1,0 +1,169 @@
+#customSplitBillDetail {
+  .custom__split__bill__detail__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 3rem 6rem;
+    text-align: center;
+
+    .custom__split__bill__detail__content {
+      border: 2px solid #8a8a8a;
+      width: 40rem;
+
+      .custom__split__bill__summary__top {
+        padding: 2rem 0;
+        border-bottom: 10px solid #cbcbcb;
+
+        & > h6.summary-title {
+          color: #6a6a6a;
+          font-weight: bold;
+        }
+
+        & > h5.summary-amount {
+          margin: 0;
+          color: #9986c1;
+          font-weight: bold;
+        }
+      }
+
+      .custom__split__bill__summary__body {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        & > h6 {
+          align-self: flex-start;
+          font-weight: bold;
+          margin: 0;
+        }
+
+        .custom__split__bill__summary__form {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+
+          .person {
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+
+            p {
+              margin: 0;
+            }
+
+            &__left__side {
+              display: flex;
+              align-items: flex-start;
+              text-align: left;
+              gap: 1rem;
+
+              .person__avatar {
+                width: 3rem;
+                object-fit: contain;
+              }
+            }
+
+            &__right__side {
+              display: flex;
+              align-items: center;
+              gap: 1.5rem;
+
+              .person__info__sec {
+                text-align: right;
+
+                & > p {
+                  color: #606060;
+                  font-size: 0.875rem;
+                }
+              }
+            }
+          }
+
+          .summary__form__group {
+            background-color: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .summary__form__inputs,
+            .summary__form__actions {
+              display: flex;
+              flex-direction: column;
+              gap: 1rem;
+            }
+
+            .summary__form__inputs {
+              width: 65%;
+
+              & > input {
+                border: none;
+                box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+                padding: 0.625rem 0.875rem;
+                outline: none;
+                width: 100%;
+              }
+            }
+
+            .summary__form__actions {
+              width: 25%;
+
+              & > button {
+                font-weight: bold;
+                padding: 0.625rem 0.875rem;
+              }
+
+              & > button.cta-add {
+                background-color: #000;
+                color: #fff;
+                border: 1px solid #000;
+                transition: 0.3s;
+
+                &:hover {
+                  color: #000;
+                  background-color: #fff;
+                }
+              }
+
+              & > button.cta-cancel {
+                border: none;
+                background-color: transparent;
+                color: #6a6a6a;
+              }
+            }
+          }
+
+          button.cta-submit {
+            background-color: #000;
+            border: 1px solid #000;
+            color: #fff;
+            padding: 1rem;
+            font-weight: bold;
+            transition: 0.3s;
+
+            &:hover:enabled {
+              color: #000;
+              background-color: #fff;
+            }
+
+            &:disabled {
+              cursor: no-drop;
+              background-color: #2a2a2a;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .custom-invalid-feedback {
+    font-size: 0.875rem;
+    text-align: left;
+    color: #f95353;
+  }
+}

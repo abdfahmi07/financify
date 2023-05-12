@@ -1,0 +1,24 @@
+#about {
+  padding: 2rem 0 5rem;
+
+  .about__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3rem;
+
+    .about__header {
+      padding-right: 12rem;
+
+      & > p {
+        margin-top: 1rem;
+      }
+    }
+
+    .about__image {
+      & > img {
+        width: 20rem;
+      }
+    }
+  }
+}
